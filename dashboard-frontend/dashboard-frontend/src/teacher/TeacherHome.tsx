@@ -62,21 +62,21 @@ const TeacherHome: React.FC<TeacherHomeProps> = ({ teacher: initialTeacher, acti
       </div>
 
       {/* Header with Logo */}
-      <div className="relative z-20 mx-6 mt-8 mb-4">
-        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-6 py-4 shadow-lg flex items-center justify-center" style={{ animation: 'slideInDown 0.6s ease-out' }}>
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-yellow-400 to-blue-400 bg-clip-text text-transparent" style={{ animation: 'slideInRight 0.6s ease-out 0.2s backwards' }}>
+      <div className="relative z-20 mx-4 md:mx-6 mt-6 md:mt-8 mb-4">
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg px-4 md:px-6 py-3 md:py-4 shadow-lg flex items-center justify-center" style={{ animation: 'slideInDown 0.6s ease-out' }}>
+          <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-yellow-400 to-blue-400 bg-clip-text text-transparent" style={{ animation: 'slideInRight 0.6s ease-out 0.2s backwards' }}>
             Payroll System
           </h1>
         </div>
       </div>
 
-      <div className="relative z-10 px-6 py-4 min-h-screen">
+      <div className="relative z-10 px-4 md:px-6 py-4 min-h-screen">
         {loading && <p className="text-center text-white text-lg font-semibold animate-pulse">Loading...</p>}
 
         {activeTab === "home" && (
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-white/20 hover:bg-white/20 transition-all duration-300" style={{ animation: 'slideIn 0.6s ease-out' }}>
-            <h2 className="text-3xl font-bold mb-8 text-center text-white drop-shadow-lg">Welcome, {teacher?.name || "Teacher"}! 👋</h2>
-            <div className="grid grid-cols-2 gap-6">
+          <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-4 md:p-6 border border-white/20 hover:bg-white/20 transition-all duration-300" style={{ animation: 'slideIn 0.6s ease-out' }}>
+            <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8 text-center text-white drop-shadow-lg">Welcome, {teacher?.name || "Teacher"}! 👋</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
               <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105 transform" style={{ animation: 'slideIn 0.6s ease-out 0.1s backwards' }}>
                 <p className="text-sm text-white/80 mb-1">Email</p>
                 <p className="text-base font-semibold text-white break-words">{teacher?.email}</p>
@@ -154,8 +154,8 @@ const AttendanceSubmission: React.FC<{ teacherId?: number }> = ({ teacherId }) =
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-bold mb-4">Submit Attendance</h2>
+    <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+      <h2 className="text-xl md:text-2xl font-bold mb-4">Submit Attendance</h2>
       {submitted && <div className="mb-4 p-4 bg-green-100 text-green-700 rounded">Attendance submitted successfully!</div>}
       {error && <div className="mb-4 p-4 bg-red-100 text-red-700 rounded">{error}</div>}
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -268,15 +268,15 @@ const TeachingLoadView: React.FC<{ teacherId?: number }> = ({ teacherId }) => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 md:space-y-6">
       {/* Summary Card */}
-      <div className="bg-gradient-to-r from-white/30 to-white/30 rounded-lg shadow-md p-6 text-white">
-        <h2 className="text-3xl font-bold mb-2">📚 Teaching Load</h2>
-        <p className="text-xl">Total Hours/Week: <span className="font-bold">{totalHours.toFixed(1)} hours</span></p>
+      <div className="bg-gradient-to-r from-white/30 to-white/30 rounded-lg shadow-md p-4 md:p-6 text-white">
+        <h2 className="text-2xl md:text-3xl font-bold mb-2">📚 Teaching Load</h2>
+        <p className="text-lg md:text-xl">Total Hours/Week: <span className="font-bold">{totalHours.toFixed(1)} hours</span></p>
       </div>
 
       {/* Teaching Load Table */}
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
         {loading ? (
           <p className="text-center text-gray-600">Loading teaching load...</p>
         ) : data.length === 0 ? (
@@ -289,20 +289,20 @@ const TeachingLoadView: React.FC<{ teacherId?: number }> = ({ teacherId }) => {
             <table className="w-full">
               <thead className="bg-gray-100 border-b-2 border-gray-300">
                 <tr>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Subject</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Class/Section</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Hours/Session</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Status</th>
-                  <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">Action</th>
+                  <th className="px-3 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-semibold text-gray-700">Subject</th>
+                  <th className="px-3 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-semibold text-gray-700">Class/Section</th>
+                  <th className="px-3 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-semibold text-gray-700">Hours/Session</th>
+                  <th className="px-3 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-semibold text-gray-700">Status</th>
+                  <th className="px-3 md:px-6 py-2 md:py-3 text-left text-xs md:text-sm font-semibold text-gray-700">Action</th>
                 </tr>
               </thead>
               <tbody>
                 {data.map((item, index) => (
                   <tr key={index} className="border-b hover:bg-blue-50 transition">
-                    <td className="px-6 py-3">{item.subject || "N/A"}</td>
-                    <td className="px-6 py-3">{item.class_section || "N/A"}</td>
-                    <td className="px-6 py-3">
-                      <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
+                    <td className="px-3 md:px-6 py-2 md:py-3 text-xs md:text-sm">{item.subject || "N/A"}</td>
+                    <td className="px-3 md:px-6 py-2 md:py-3 text-xs md:text-sm">{item.class_section || "N/A"}</td>
+                    <td className="px-3 md:px-6 py-2 md:py-3">
+                      <span className="bg-blue-100 text-blue-800 px-2 md:px-3 py-1 rounded-full text-xs md:text-sm font-semibold">
                         {(() => {
                           try {
                             const [sh, sm] = (item.start_time || '').split(':').map((v: string) => parseInt(v, 10));
@@ -318,16 +318,16 @@ const TeachingLoadView: React.FC<{ teacherId?: number }> = ({ teacherId }) => {
                         })()} hrs
                       </span>
                     </td>
-                    <td className="px-6 py-3">
-                      <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">
+                    <td className="px-3 md:px-6 py-2 md:py-3">
+                      <span className="bg-green-100 text-green-800 px-2 md:px-3 py-1 rounded-full text-xs font-semibold">
                         ✓ Active
                       </span>
                     </td>
-                    <td className="px-6 py-3">
+                    <td className="px-3 md:px-6 py-2 md:py-3">
                       <button
                         onClick={() => handleMarkAsDone(item.id)}
                         disabled={marking === item.id || item.completion_status === 'pending' || item.completion_status === 'approved'}
-                        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 text-sm font-semibold"
+                        className="px-2 md:px-4 py-1 md:py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 text-xs md:text-sm font-semibold"
                       >
                         {marking === item.id ? "Processing..." : item.completion_status === 'approved' ? "✓ Approved" : item.completion_status === 'pending' ? "⏳ Pending" : "Mark Done"}
                       </button>
@@ -408,8 +408,8 @@ Status: ${selectedSalary.status}
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-2xl font-bold mb-4">Salary / Payslip View</h2>
+    <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
+      <h2 className="text-xl md:text-2xl font-bold mb-4">Salary / Payslip View</h2>
 
       {loading ? (
         <p className="text-center text-gray-600">Loading...</p>
@@ -549,12 +549,12 @@ const MessagesComponent: React.FC<{ teacherId?: number; teacherName?: string }> 
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 w-full">
-      <h2 className="text-2xl font-bold mb-6">📨 Messages</h2>
+    <div className="bg-white rounded-lg shadow-md p-4 md:p-6 w-full">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 md:mb-6">📨 Messages</h2>
 
       <div className="space-y-4">
         {/* Messages List */}
-        <div className="bg-gray-50 rounded-lg p-4 h-96 overflow-y-auto space-y-3 border border-gray-200">
+        <div className="bg-gray-50 rounded-lg p-4 h-80 md:h-96 overflow-y-auto space-y-3 border border-gray-200">
           {loading ? (
             <p className="text-center text-gray-600">Loading messages...</p>
           ) : messages.length === 0 ? (
