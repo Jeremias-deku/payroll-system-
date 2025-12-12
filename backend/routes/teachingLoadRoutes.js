@@ -14,4 +14,9 @@ router.get("/:id", TeachingLoadController.getTeachingLoadById);
 router.put("/:id", TeachingLoadController.updateTeachingLoad);
 router.delete("/:id", TeachingLoadController.deleteTeachingLoad);
 
+// Teaching Load Completion Workflow routes
+router.patch("/:id/mark-done", TeachingLoadController.markTeachingLoadAsDone);
+router.patch("/:id/approve", TeachingLoadController.approveTeachingLoad);
+router.patch("/:id/disapprove", TeachingLoadController.disapproveTeachingLoad);
+
 export default router;

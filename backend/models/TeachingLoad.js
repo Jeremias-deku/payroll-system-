@@ -12,6 +12,7 @@ export const createTeachingLoadTable = () => {
       start_time TIME NOT NULL,
       end_time TIME NOT NULL,
       status ENUM('Active', 'Inactive') DEFAULT 'Active',
+      completion_status ENUM('pending', 'approved', 'disapproved') DEFAULT NULL,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (teacher_id) REFERENCES teachers(id) ON DELETE CASCADE
     )
@@ -86,5 +87,35 @@ export const updateTeachingLoad = (id, loadData, callback) => {
 // Delete teaching load
 export const deleteTeachingLoad = (id, callback) => {
   const sql = "DELETE FROM teaching_load WHERE id = ?";
+  db.query(sql, [id], callback);
+};
+
+// Mark teaching load as done (pending admin approval)
+export const markTeachingLoadAsDone = (id, callback) => {
+  const sql = `
+    UPDATE teaching_load 
+    SET completion_status = 'pending'
+    WHERE id = ?
+  `;
+  db.query(sql, [id], callback);
+};
+
+// Approve teaching load (admin action)
+export const approveTeachingLoad = (id, callback) => {
+  const sql = `
+    UPDATE teaching_load 
+    SET completion_status = 'approved'
+    WHERE id = ?
+  `;
+  db.query(sql, [id], callback);
+};
+
+// Disapprove teaching load (admin action - allow teacher to resubmit)
+export const disapproveTeachingLoad = (id, callback) => {
+  const sql = `
+    UPDATE teaching_load 
+    SET completion_status = 'disapproved'
+    WHERE id = ?
+  `;
   db.query(sql, [id], callback);
 };

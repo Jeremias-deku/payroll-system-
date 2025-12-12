@@ -92,6 +92,42 @@ export const deleteTeachingLoad = (req, res) => {
   });
 };
 
+export const markTeachingLoadAsDone = (req, res) => {
+  const { id } = req.params;
+
+  TeachingLoad.markTeachingLoadAsDone(id, (err) => {
+    if (err) {
+      console.error("Error marking teaching load as done:", err);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+    res.status(200).json({ success: true, message: "Teaching load marked as done. Pending admin approval." });
+  });
+};
+
+export const approveTeachingLoad = (req, res) => {
+  const { id } = req.params;
+
+  TeachingLoad.approveTeachingLoad(id, (err) => {
+    if (err) {
+      console.error("Error approving teaching load:", err);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+    res.status(200).json({ success: true, message: "Teaching load approved! Hours recorded in payslip." });
+  });
+};
+
+export const disapproveTeachingLoad = (req, res) => {
+  const { id } = req.params;
+
+  TeachingLoad.disapproveTeachingLoad(id, (err) => {
+    if (err) {
+      console.error("Error disapproving teaching load:", err);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+    res.status(200).json({ success: true, message: "Teaching load disapproved. Teacher can resubmit." });
+  });
+};
+
 // Initialize tables
 export const initializeTables = (req, res) => {
   TeachingLoad.createTeachingLoadTable();
