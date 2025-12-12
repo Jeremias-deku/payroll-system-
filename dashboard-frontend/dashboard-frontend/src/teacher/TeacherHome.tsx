@@ -76,7 +76,7 @@ const TeacherHome: React.FC<TeacherHomeProps> = ({ teacher: initialTeacher, acti
         {activeTab === "home" && (
           <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-6 border border-white/20 hover:bg-white/20 transition-all duration-300" style={{ animation: 'slideIn 0.6s ease-out' }}>
             <h2 className="text-3xl font-bold mb-6 text-center text-white drop-shadow-lg">Welcome, {teacher?.name || "Teacher"}! 👋</h2>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4">
               <div className="bg-white/20 backdrop-blur-sm p-4 rounded-lg border border-white/30 hover:bg-white/30 transition-all duration-300 hover:scale-105 transform" style={{ animation: 'slideIn 0.6s ease-out 0.1s backwards' }}>
                 <p className="text-sm text-white/80">Email</p>
                 <p className="text-lg font-semibold text-white">{teacher?.email}</p>
@@ -417,7 +417,7 @@ Status: ${selectedSalary.status}
 
               <div className="bg-gray-50 p-6 rounded border border-gray-200">
                 <h3 className="text-lg font-bold mb-4">Salary Breakdown</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4">
                   <div>
                     <p className="text-sm text-gray-600">Period</p>
                     <p className="font-semibold">
@@ -523,7 +523,7 @@ const MessagesComponent: React.FC<{ teacherId?: number; teacherName?: string }> 
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 max-w-2xl mx-auto">
+    <div className="bg-white rounded-lg shadow-md p-6 w-full">
       <h2 className="text-2xl font-bold mb-6">📨 Messages</h2>
 
       <div className="space-y-4">
