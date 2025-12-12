@@ -1004,47 +1004,47 @@ const ManageTeachers: React.FC<{ teachers: any[]; onRefresh: () => void }> = ({ 
                   <img
                     src={selectedTeacherForProfile.profile_image}
                     alt="Profile"
-                    className="w-32 h-32 rounded-full object-cover border-4 border-gray-300"
+                    className="w-28 md:w-32 h-28 md:h-32 rounded-full object-cover border-4 border-gray-300"
                   />
                 </div>
               ) : (
                 <div className="flex justify-center">
-                  <div className="w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center text-5xl">
+                  <div className="w-28 md:w-32 h-28 md:h-32 rounded-full bg-gray-200 flex items-center justify-center text-3xl md:text-5xl">
                     👤
                   </div>
                 </div>
               )}
 
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 gap-3 md:gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Name</label>
-                  <p className="text-gray-900">{selectedTeacherForProfile.name}</p>
+                  <label className="block text-xs md:text-sm font-medium text-gray-700">Name</label>
+                  <p className="text-gray-900 text-sm md:text-base">{selectedTeacherForProfile.name}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Email</label>
-                  <p className="text-gray-900">{selectedTeacherForProfile.email}</p>
+                  <label className="block text-xs md:text-sm font-medium text-gray-700">Email</label>
+                  <p className="text-gray-900 text-sm md:text-base">{selectedTeacherForProfile.email}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Department</label>
-                  <p className="text-gray-900">{selectedTeacherForProfile.department}</p>
+                  <label className="block text-xs md:text-sm font-medium text-gray-700">Department</label>
+                  <p className="text-gray-900 text-sm md:text-base">{selectedTeacherForProfile.department}</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Basic Pay</label>
-                  <p className="text-gray-900">₱{parseFloat(selectedTeacherForProfile.basic_pay).toLocaleString()}</p>
+                  <label className="block text-xs md:text-sm font-medium text-gray-700">Basic Pay</label>
+                  <p className="text-gray-900 text-sm md:text-base">₱{parseFloat(selectedTeacherForProfile.basic_pay).toLocaleString()}</p>
                 </div>
               </div>
               
               {selectedTeacherForProfile.phone && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Phone</label>
-                  <p className="text-gray-900">{selectedTeacherForProfile.phone}</p>
+                  <label className="block text-xs md:text-sm font-medium text-gray-700">Phone</label>
+                  <p className="text-gray-900 text-sm md:text-base">{selectedTeacherForProfile.phone}</p>
                 </div>
               )}
 
               {selectedTeacherForProfile.address && (
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Address</label>
-                  <p className="text-gray-900">{selectedTeacherForProfile.address}</p>
+                  <label className="block text-xs md:text-sm font-medium text-gray-700">Address</label>
+                  <p className="text-gray-900 text-sm md:text-base">{selectedTeacherForProfile.address}</p>
                 </div>
               )}
 
