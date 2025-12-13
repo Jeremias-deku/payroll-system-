@@ -6,6 +6,7 @@ import AdminLogin from './admin/AdminLogin';
 import AdminDashboard from './admin/AdminDashboard';
 import Sidebar from './components/Sidebar';
 import ResetPassword from './components/ResetPassword';
+import bgImage from './images/bg.png';
 function App() {
   const [page, setPage] = useState('home');
   const [user, setUser] = useState<any>(null);
@@ -42,7 +43,7 @@ function App() {
         <div 
           className="min-h-screen bg-cover bg-center bg-fixed relative overflow-hidden"
           style={{
-            backgroundImage: `url(${require('./images/bg.png')})`,
+            backgroundImage: `url(${bgImage})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             backgroundAttachment: 'fixed',

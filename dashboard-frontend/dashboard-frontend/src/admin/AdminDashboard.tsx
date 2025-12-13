@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../components/Modal";
 import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import bgImage from "../images/bg.png";
 
 interface TeacherSubmission {
   id: number;
@@ -76,7 +77,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ activeTab = "dashboard"
     <div 
       className="min-h-screen relative overflow-hidden"
       style={{
-        backgroundImage: `url(${require('../images/bg.png')})`,
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: '110%',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',

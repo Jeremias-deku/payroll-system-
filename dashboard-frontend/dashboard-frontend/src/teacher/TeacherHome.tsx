@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import TeacherSettings from "./TeacherSettings";
+import bgImage from "../images/bg.png";
 
 interface TeacherData {
   id: number;
@@ -28,7 +29,7 @@ const TeacherHome: React.FC<TeacherHomeProps> = ({ teacher: initialTeacher, acti
     <div 
       className="min-h-screen relative overflow-hidden"
       style={{
-        backgroundImage: `url(${require('../images/bg.png')})`,
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: '110%',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',
