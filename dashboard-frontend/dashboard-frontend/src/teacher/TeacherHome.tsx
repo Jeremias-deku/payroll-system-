@@ -24,24 +24,6 @@ const TeacherHome: React.FC<TeacherHomeProps> = ({ teacher: initialTeacher, acti
     setTeacher(initialTeacher);
   }, [initialTeacher]);
 
-  const fetchTeacherData = async (teacherId: string) => {
-    setLoading(true);
-    try {
-      const response = await axios.get(`http://localhost:4000/api/teachers/${teacherId}`);
-      if (response.data.success) {
-        setTeacher(response.data.data);
-      }
-    } catch (error) {
-      console.error("Error fetching teacher data:", error);
-    }
-    setLoading(false);
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("teacherId");
-    onLogout();
-  };
-
   return (
     <div 
       className="min-h-screen relative overflow-hidden"
@@ -217,6 +199,7 @@ const TeachingLoadView: React.FC<{ teacherId?: number }> = ({ teacherId }) => {
   const [totalHours, setTotalHours] = useState(0);
   const [marking, setMarking] = useState<number | null>(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (teacherId) {
       fetchData();
@@ -360,6 +343,7 @@ const SalaryView: React.FC<{ teacherId?: number }> = ({ teacherId }) => {
   const [loading, setLoading] = useState(true);
   const [selectedSalary, setSelectedSalary] = useState<Salary | null>(null);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (teacherId) {
       fetchSalaries();
@@ -501,6 +485,7 @@ const MessagesComponent: React.FC<{ teacherId?: number; teacherName?: string }> 
   const [newMessage, setNewMessage] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (teacherId) {
       fetchMessages();

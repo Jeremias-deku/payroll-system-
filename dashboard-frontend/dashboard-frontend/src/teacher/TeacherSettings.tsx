@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 interface Props {
@@ -23,7 +23,6 @@ const TeacherSettings: React.FC<Props> = ({ teacherId }) => {
   // Profile fields
   const [teacher, setTeacher] = useState<TeacherData | null>(null);
   const [name, setName] = useState('');
-  const [bio, setBio] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
   const [profileImage, setProfileImage] = useState<string | null>(null);
@@ -39,20 +38,13 @@ const TeacherSettings: React.FC<Props> = ({ teacherId }) => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (teacherId) {
-      fetchTeacher();
-    }
-  }, [teacherId]);
-
-  const fetchTeacher = async () => {
+  const fetchTeacher = useCallback(async () => {
     try {
       const response = await axios.get(`http://localhost:4000/api/teachers/${teacherId}`);
       if (response.data.success) {
         const data = response.data.data;
         setTeacher(data);
         setName(data.name);
-        setBio(data.bio || '');
         setPhone(data.phone || '');
         setAddress(data.address || '');
         setImagePreview(data.profile_image || null);
@@ -60,7 +52,13 @@ const TeacherSettings: React.FC<Props> = ({ teacherId }) => {
     } catch (err) {
       console.error('Error fetching teacher:', err);
     }
-  };
+  }, [teacherId]);
+
+  useEffect(() => {
+    if (teacherId) {
+      fetchTeacher();
+    }
+  }, [teacherId, fetchTeacher]);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
