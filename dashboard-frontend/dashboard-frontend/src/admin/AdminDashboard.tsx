@@ -172,7 +172,7 @@ const Dashboard: React.FC<{ submissions: TeacherSubmission[]; alerts: Alert[] }>
       <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-4 md:p-6 border border-white/20 hover:bg-white/20 transition-all duration-300" style={{ animation: 'slideIn 0.6s ease-out' }}>
         <div className="flex flex-col md:flex-row items-start md:items-center gap-3 md:gap-4">
           <label htmlFor="teacher-select" className="text-base md:text-lg font-semibold text-white">
-            🎯 Filter by Teacher:
+           Filter by Teacher:
           </label>
           <select
             id="teacher-select"
@@ -180,7 +180,7 @@ const Dashboard: React.FC<{ submissions: TeacherSubmission[]; alerts: Alert[] }>
             onChange={(e) => setSelectedTeacher(e.target.value)}
             className="w-full md:w-auto px-4 py-2 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/20 text-white backdrop-blur-sm cursor-pointer hover:bg-white/30 transition-all text-sm md:text-base"
           >
-            <option value="">📊 All Teachers</option>
+            <option value="">All Teachers</option>
             {uniqueTeachers.map((teacher) => (
               <option key={teacher} value={teacher}>
                 👤 {teacher}
@@ -191,8 +191,7 @@ const Dashboard: React.FC<{ submissions: TeacherSubmission[]; alerts: Alert[] }>
             <button
               onClick={() => setSelectedTeacher("")}
               className="w-full md:w-auto px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition text-sm md:text-base"
-            >
-              ✕ Reset
+            >X
             </button>
           )}
         </div>
@@ -201,7 +200,7 @@ const Dashboard: React.FC<{ submissions: TeacherSubmission[]; alerts: Alert[] }>
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
         <div className="bg-gradient-to-br from-blue-500/30 to-blue-600/20 backdrop-blur-sm p-3 md:p-6 rounded-lg shadow-lg border border-blue-400/50 hover:from-blue-500/40 hover:to-blue-600/30 transition-all duration-300 transform hover:scale-105" style={{ animation: 'slideIn 0.6s ease-out 0.1s backwards' }}>
-          <p className="text-xs md:text-sm text-white/80">📊 Total Submissions</p>
+          <p className="text-xs md:text-sm text-white/80"> Total Submissions</p>
           <p className="text-2xl md:text-3xl font-bold text-white">{submissions.length}</p>
         </div>
         <div className="bg-gradient-to-br from-yellow-500/30 to-yellow-600/20 backdrop-blur-sm p-3 md:p-6 rounded-lg shadow-lg border border-yellow-400/50 hover:from-yellow-500/40 hover:to-yellow-600/30 transition-all duration-300 transform hover:scale-105" style={{ animation: 'slideIn 0.6s ease-out 0.2s backwards' }}>
@@ -213,7 +212,7 @@ const Dashboard: React.FC<{ submissions: TeacherSubmission[]; alerts: Alert[] }>
           <p className="text-2xl md:text-3xl font-bold text-white">{verifiedCount}</p>
         </div>
         <div className="bg-gradient-to-br from-purple-500/30 to-purple-600/20 backdrop-blur-sm p-3 md:p-6 rounded-lg shadow-lg border border-purple-400/50 hover:from-purple-500/40 hover:to-purple-600/30 transition-all duration-300 transform hover:scale-105" style={{ animation: 'slideIn 0.6s ease-out 0.4s backwards' }}>
-          <p className="text-xs md:text-sm text-white/80">⏱️ Total Hours</p>
+          <p className="text-xs md:text-sm text-white/80">Total Hours</p>
           <p className="text-2xl md:text-3xl font-bold text-white">{totalHours.toFixed(1)}h</p>
         </div>
       </div>
@@ -222,7 +221,7 @@ const Dashboard: React.FC<{ submissions: TeacherSubmission[]; alerts: Alert[] }>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
         {/* Bar Chart - Monthly Completed Work (Hours) */}
         <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-4 md:p-6 border border-white/20 hover:bg-white/20 transition-all duration-300" style={{ animation: 'slideIn 0.6s ease-out 0.5s backwards' }}>
-          <h2 className="text-lg md:text-xl font-bold mb-4 text-white">📈 Hours Worked by Date & Month</h2>
+          <h2 className="text-lg md:text-xl font-bold mb-4 text-white">Hours Worked by Date & Month</h2>
           {chartData.length === 0 ? (
             <p className="text-white/60">No data available</p>
           ) : (
@@ -240,7 +239,7 @@ const Dashboard: React.FC<{ submissions: TeacherSubmission[]; alerts: Alert[] }>
 
         {/* Pie Chart - Hours Worked by Teacher */}
         <div className="bg-white/10 backdrop-blur-sm rounded-lg shadow-lg p-4 md:p-6 border border-white/20 hover:bg-white/20 transition-all duration-300" style={{ animation: 'slideIn 0.6s ease-out 0.6s backwards' }}>
-          <h2 className="text-lg md:text-xl font-bold mb-4 text-white">🎓 Teaching Hours by Teacher (Top 5)</h2>
+          <h2 className="text-lg md:text-xl font-bold mb-4 text-white"> Teaching Hours by Teacher (Top 5)</h2>
           {hoursChartData.length === 0 ? (
             <p className="text-white/60">No data available</p>
           ) : (
@@ -295,18 +294,18 @@ const Dashboard: React.FC<{ submissions: TeacherSubmission[]; alerts: Alert[] }>
       {/* Quick Links */}
       <div className="bg-white rounded-lg shadow-md p-4 md:p-6">
         <h2 className="text-lg md:text-xl font-bold mb-4">Quick Links</h2>
-        <div className="grid grid-cols-1 gap-3 md:gap-4">
+        <div className="grid grid-cols-2 gap-1 md:gap-2">
           <button className="p-3 md:p-4 bg-blue-100 hover:bg-blue-200 rounded text-left text-sm md:text-base font-semibold">
-            📋 View All Submissions
+            View All Submissions
           </button>
           <button className="p-4 bg-green-100 hover:bg-green-200 rounded text-left">
             ✓ Verify Attendance
           </button>
           <button className="p-4 bg-purple-100 hover:bg-purple-200 rounded text-left">
-            💰 Compute Salaries
+            Compute Salaries
           </button>
           <button className="p-4 bg-orange-100 hover:bg-orange-200 rounded text-left">
-            📊 Generate Reports
+            Generate Reports
           </button>
         </div>
       </div>
@@ -1449,12 +1448,12 @@ const AdminSettings: React.FC = () => {
 
   return (
     <div className="bg-white/30 text-center rounded-lg shadow-md p-6">
-      <h2 className="text-3xl text-white font-bold mb-8">⚙️ Admin Settings</h2>
+      <h2 className="text-3xl text-white font-bold mb-8">Admin Settings</h2>
 
       {/* Change Password Section */}
       <div className="space-y-6">
         <div className="border-b-2 border-gray-200 pb-6">
-          <h3 className="text-2xl font-bold text-white mb-4">🔐 Change Password</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">Change Password</h3>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-white mb-2">Current Password</label>

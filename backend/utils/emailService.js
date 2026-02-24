@@ -1,13 +1,24 @@
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
 
+const emailUser = process.env.EMAIL_USER;
+const emailPassword = process.env.EMAIL_PASSWORD || process.env.EMAIL_PASS;
+const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+
+const hasValidEmailConfig = () => {
+  if (!emailUser || !emailPassword) return false;
+  const loweredUser = emailUser.toLowerCase();
+  const loweredPass = emailPassword.toLowerCase();
+  return !loweredUser.includes('your-email') && !loweredPass.includes('your-app-password');
+};
+
 // Email configuration - using Gmail (you can replace with your email service)
 // For Gmail, use an App Password if 2FA is enabled
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: process.env.EMAIL_SERVICE || 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || 'your-email@gmail.com',
-    pass: process.env.EMAIL_PASSWORD || 'your-app-password'
+    user: emailUser,
+    pass: emailPassword
   }
 });
 
@@ -19,8 +30,18 @@ export const generateResetToken = () => {
 // Send password reset email
 export const sendPasswordResetEmail = async (email, token, teacherName = 'Teacher') => {
   try {
-    // Create reset link (in production, this would be a frontend URL)
-    const resetLink = `http://localhost:3000/reset-password?token=${token}&email=${encodeURIComponent(email)}`;
+    if (!hasValidEmailConfig()) {
+      return {
+        success: false,
+        message: 'Email service is not configured',
+        error: 'Set EMAIL_USER and EMAIL_PASSWORD (or EMAIL_PASS) in backend/.env'
+      };
+    }
+
+    const resetUrl = new URL('/reset-password', frontendUrl);
+    resetUrl.searchParams.set('token', token);
+    resetUrl.searchParams.set('email', email);
+    const resetLink = resetUrl.toString();
     
     const mailOptions = {
       from: process.env.EMAIL_USER || 'noreply@schoolpayroll.com',
@@ -112,6 +133,14 @@ export const sendPasswordResetEmail = async (email, token, teacherName = 'Teache
 // Send welcome email when teacher is created
 export const sendWelcomeEmail = async (email, teacherName, initialPassword) => {
   try {
+    if (!hasValidEmailConfig()) {
+      return {
+        success: false,
+        message: 'Email service is not configured',
+        error: 'Set EMAIL_USER and EMAIL_PASSWORD (or EMAIL_PASS) in backend/.env'
+      };
+    }
+
     const mailOptions = {
       from: process.env.EMAIL_USER || 'noreply@schoolpayroll.com',
       to: email,
@@ -201,6 +230,11 @@ export const sendWelcomeEmail = async (email, teacherName, initialPassword) => {
 // Verify transporter connection
 export const verifyEmailConnection = async () => {
   try {
+    if (!hasValidEmailConfig()) {
+      console.error('❌ Email service not configured. Set EMAIL_USER and EMAIL_PASSWORD (or EMAIL_PASS).');
+      return false;
+    }
+
     await transporter.verify();
     console.log('✅ Email service connected successfully');
     return true;

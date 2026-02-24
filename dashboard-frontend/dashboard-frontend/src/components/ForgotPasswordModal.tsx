@@ -12,6 +12,7 @@ const ForgotPasswordModal: React.FC<Props> = ({ role, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const genericMessage = 'If the account exists, reset instructions have been sent';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,15 +23,11 @@ const ForgotPasswordModal: React.FC<Props> = ({ role, onClose }) => {
     try {
       const url = role === 'teacher' ? '/api/teachers/forgot-password' : '/api/admin/forgot-password';
       // call backend endpoint if available
-      const resp = await axios.post(`http://localhost:4000${url}`, { email });
-      if (resp.data && resp.data.success) {
-        setMessage(resp.data.message || 'Check your email for reset instructions');
-      } else {
-        setMessage(resp.data?.message || 'If the account exists, an email was sent');
-      }
+      await axios.post(`http://localhost:4000${url}`, { email });
+      setMessage(genericMessage);
     } catch (err: any) {
       console.error('Forgot password error:', err);
-      setError(err.response?.data?.message || 'Failed to process request');
+      setMessage(genericMessage);
     }
     setLoading(false);
   };

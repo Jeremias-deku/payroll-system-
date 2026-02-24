@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 
 // Import routes
 import teacherRoutes from "./routes/teacherRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import attendanceRoutes from "./routes/attendanceRoutes.js";
 import teachingLoadRoutes from "./routes/teachingLoadRoutes.js";
 import salaryRoutes from "./routes/salaryRoutes.js";
@@ -44,9 +45,11 @@ const initializeDatabaseTables = () => {
 
 // Call initialization on server start
 initializeDatabaseTables();
+verifyEmailConnection();
 
 // Routes
 app.use("/api/teachers", teacherRoutes);
+app.use("/api/admin", adminRoutes);
 app.use("/api/attendance", attendanceRoutes);
 app.use("/api/teaching-load", teachingLoadRoutes);
 app.use("/api/salary", salaryRoutes);
@@ -69,16 +72,17 @@ app.post("/api/admin/forgot-password", async (req, res) => {
     try {
       const token = 'temp-reset-token-' + Date.now();
       const adminName = 'Administrator';
-      await sendPasswordResetEmail(email, token, adminName);
-      res.status(200).json({ success: true, message: 'Check your email for reset instructions' });
+      const emailResult = await sendPasswordResetEmail(email, token, adminName);
+      if (!emailResult.success) {
+        console.error('Error sending password reset email to admin:', emailResult.error);
+      }
     } catch (error) {
       console.error('Error sending password reset email to admin:', error);
-      res.status(500).json({ success: false, message: 'Error sending email' });
     }
-  } else {
-    // Security: return success even if email doesn't exist
-    res.status(200).json({ success: true, message: 'If the account exists, reset instructions have been sent' });
   }
+
+  // Security: always return generic success response
+  return res.status(200).json({ success: true, message: 'If the account exists, reset instructions have been sent' });
 });
 
 // Admin change-password endpoint

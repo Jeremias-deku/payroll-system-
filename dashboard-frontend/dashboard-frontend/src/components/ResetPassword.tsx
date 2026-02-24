@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './Modal';
+import bgImage from '../images/bg.png';
 
 interface ResetPasswordProps {
   onBack?: () => void;
 }
+
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 
 export default function ResetPassword({ onBack }: ResetPasswordProps) {
   const [newPassword, setNewPassword] = useState('');
@@ -55,7 +58,8 @@ export default function ResetPassword({ onBack }: ResetPasswordProps) {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/api/teachers/reset-password', {
+      // Try teacher endpoint first
+      let response = await fetch(`${API_BASE_URL}/api/teachers/reset-password`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -67,7 +71,23 @@ export default function ResetPassword({ onBack }: ResetPasswordProps) {
         }),
       });
 
-      const data = await response.json();
+      let data = await response.json();
+
+      // If teacher endpoint fails, try admin endpoint
+      if (!data.success) {
+        response = await fetch(`${API_BASE_URL}/api/admin/reset-password`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            token,
+            email,
+            newPassword,
+          }),
+        });
+        data = await response.json();
+      }
 
       if (data.success) {
         setMessage('Password reset successfully! You can now login with your new password.');
@@ -92,7 +112,7 @@ export default function ResetPassword({ onBack }: ResetPasswordProps) {
     <div 
       className="min-h-screen bg-cover bg-center bg-fixed relative overflow-hidden flex items-center justify-center"
       style={{
-        backgroundImage: `url(${require('../images/bg.png')})`,
+        backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundAttachment: 'fixed',

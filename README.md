@@ -219,7 +219,9 @@ CREATE TABLE notifications (
    NODE_ENV=development
    JWT_SECRET=your_jwt_secret
    EMAIL_USER=your_email@gmail.com
-   EMAIL_PASS=your_app_password
+   EMAIL_PASSWORD=your_app_password
+   # or EMAIL_PASS=your_app_password
+   FRONTEND_URL=http://localhost:3000
    ```
 
 4. **Initialize Database Schema**
